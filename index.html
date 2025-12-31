@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wrapped de Pasos — Año</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#111a2a;
+      --card2:#0f1726;
+      --text:#e8eefc;
+      --muted:#9fb0d0;
+      --line:rgba(255,255,255,.10);
+      --accent:#7aa7ff;
+      --good:#48d18f;
+      --warn:#ffcf5a;
+      --bad:#ff6b7a;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(122,167,255,.22), transparent 55%),
+        radial-gradient(900px 500px at 90% 10%, rgba(72,209,143,.15), transparent 60%),
+        linear-gradient(180deg, #070a10 0%, var(--bg) 60%, #060810 100%);
+      color:var(--text);
+      min-height:100vh;
+    }
+    a{color:var(--accent)}
+    .wrap{max-width:1020px;margin:0 auto;padding:22px 14px 44px}
+
+    /* ---------- DESKTOP DASHBOARD ---------- */
+    .dash header{
+      padding:18px 16px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+    }
+    .title{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
+    h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .sub{margin-top:8px;color:var(--muted);line-height:1.35;font-size:14px}
+
+    .heroNumbers{
+      display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:stretch
+    }
+    .heroPill{
+      flex:1 1 260px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+    .heroK{font-size:12px;color:var(--muted)}
+    .heroV{
+      font-size:40px;
+      font-weight:950;
+      letter-spacing:-1px;
+      margin-top:6px;
+      line-height:1;
+    }
+    .heroV small{font-size:14px;color:var(--muted);font-weight:700;letter-spacing:0}
+    .heroV.accent{color:var(--accent)}
+    .heroV.good{color:var(--good)}
+
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media (min-width: 900px){
+      .grid{grid-template-columns: 1.15fr .85fr}
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    .card .hd{
+      padding:14px 14px 10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .card .hd h2{
+      margin:0;
+      font-size:15px;
+      letter-spacing:.2px;
+      color:var(--text);
+    }
+    .card .bd{padding:14px}
+
+    .btn{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 14px;
+      padding:10px 12px;
+      font-weight:800;
+      font-size:13px;
+      user-select:none;
+    }
+    .btn:active{transform: translateY(1px)}
+    .tag{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .rows{display:flex;flex-direction:column;gap:10px}
+    .row{
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+    }
+    .rowTop{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:10px;
+    }
+    .rowLeft b{font-size:15px}
+    .rowLeft .km{margin-top:4px;color:rgba(72,209,143,.95);font-weight:800;font-size:13px}
+    .rowRight{
+      text-align:right;
+      font-weight:950;
+      font-size:26px;
+      letter-spacing:-.5px;
+      line-height:1.05;
+    }
+    .rowRight small{
+      display:block;
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:0;
+    }
+    .bar{
+      margin-top:12px;height:12px;border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .bar > i{
+      display:block;height:100%;width:0%;
+      background: linear-gradient(90deg, rgba(122,167,255,.95), rgba(72,209,143,.95));
+      border-radius:999px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .stat{
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      padding:12px 12px;
+    }
+    .stat .k{font-size:12px;color:var(--muted);font-weight:700}
+    .stat .v{font-size:22px;font-weight:950;margin-top:6px;letter-spacing:-.3px}
+    .stat .h{font-size:12px;color:var(--muted);margin-top:2px}
+
+    .big{
+      grid-column: 1 / -1;
+      padding:14px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.18);
+      background: rgba(122,167,255,.08);
+    }
+    .bigTitle{font-weight:950;letter-spacing:-.2px}
+    .list{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.5}
+    .list b{color:var(--text)}
+
+    canvas{
+      width:100%;
+      height:280px;
+      background: rgba(0,0,0,.16);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+    }
+    .foot{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.4;text-align:center}
+
+    /* ---------- STORIES (MOBILE) ---------- */
+    .stories{
+      display:none;
+      position:fixed; inset:0;
+      background:
+        radial-gradient(900px 400px at 10% 0%, rgba(122,167,255,.20), transparent 50%),
+        radial-gradient(900px 400px at 90% 10%, rgba(72,209,143,.14), transparent 55%),
+        linear-gradient(180deg, #070a10 0%, var(--bg) 70%, #060810 100%);
+      color:var(--text);
+      z-index:50;
+      overflow:hidden;
+    }
+    .storyWrap{height:100%; display:flex; flex-direction:column; padding:14px}
+    .progress{
+      display:flex; gap:6px; padding:10px 6px 8px;
+    }
+    .prog{
+      flex:1;
+      height:4px;
+      background: rgba(255,255,255,.12);
+      border-radius:999px;
+      overflow:hidden;
+      position:relative;
+    }
+    .prog > i{
+      position:absolute; inset:0;
+      width:0%;
+      background: rgba(255,255,255,.85);
+      border-radius:999px;
+    }
+    .storyCard{
+      flex:1;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:26px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .storyInner{height:100%; padding:18px; display:flex; flex-direction:column; gap:12px}
+    .storyTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .storyTitle{
+      font-size:16px;
+      color: rgba(232,238,252,.92);
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+    .storyHint{
+      font-size:12px;
+      color: var(--muted);
+      font-weight:700;
+      text-align:right;
+      line-height:1.25;
+    }
+    .storyBig{
+      margin-top:8px;
+      font-size:46px;
+      font-weight:980;
+      letter-spacing:-1px;
+      line-height:1;
+    }
+    .storyBig small{font-size:14px;color:var(--muted);font-weight:800;letter-spacing:0}
+    .storyBig.accent{color:var(--accent)}
+    .storyBig.good{color:var(--good)}
+    .storySub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.4;
+    }
+    .storyBox{
+      margin-top:auto;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      border-radius:18px;
+      padding:12px;
+    }
+    .storyBox b{color:var(--text)}
+    .storyList{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.5;font-size:14px}
+    .storyMonthGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:6px;
+      overflow:auto;
+      padding-bottom:6px;
+    }
+    .storyMonth{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+      border-radius:18px;
+      padding:12px;
+    }
+    .storyMonth .m{font-weight:950}
+    .storyMonth .p{font-weight:980;font-size:22px;letter-spacing:-.4px;margin-top:6px}
+    .storyMonth .k{color:rgba(72,209,143,.95);font-weight:900;margin-top:4px;font-size:12px}
+
+    .storyNav{
+      display:flex; gap:10px; padding:12px 6px 4px;
+    }
+    .storyBtn{
+      flex:1;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      border-radius:16px;
+      padding:12px 12px;
+      font-weight:950;
+      font-size:14px;
+      user-select:none;
+    }
+    .storyBtn.primary{
+      background: linear-gradient(90deg, rgba(122,167,255,.90), rgba(72,209,143,.90));
+      color:#08101f;
+      border:none;
+    }
+
+    /* tap areas for story navigation */
+    .tapL,.tapR{
+      position:absolute; top:0; bottom:0; width:30%;
+      z-index:3;
+    }
+    .tapL{left:0}
+    .tapR{right:0}
+
+    /* show stories on small screens */
+    @media (max-width: 740px){
+      .dash{display:none;}
+      .stories{display:block;}
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ---------- DESKTOP DASHBOARD ---------- -->
+<div class="wrap dash">
+  <header>
+    <div class="title">
+      <div>
+        <h1>🏃‍♂️ Wrapped de Pasos — Tu año en números</h1>
+        <div class="sub">Mes a mes, recuento final y comparaciones divertidas (estimado por tu zancada real).</div>
+      </div>
+      <span class="tag" id="strideTag">Zancada: — m/paso</span>
+    </div>
+
+    <div class="heroNumbers">
+      <div class="heroPill">
+        <div class="heroK">Pasos totales</div>
+        <div class="heroV accent" id="heroSteps">— <small>pasos</small></div>
+      </div>
+      <div class="heroPill">
+        <div class="heroK">Distancia total</div>
+        <div class="heroV good" id="heroKm">— <small>km</small></div>
+      </div>
+      <div class="heroPill">
+        <div class="heroK">Media diaria</div>
+        <div class="heroV" id="heroAvgDay">— <small>pasos/día</small></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <div class="hd">
+        <h2>📅 Mes a mes</h2>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+          <button class="btn" id="toggleSort">Ordenar: cronológico</button>
+          <span class="tag" id="bestTag">—</span>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="rows" id="monthRows"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hd">
+        <h2>📊 Recuento final</h2>
+        <span class="tag" id="yearTag">Año completo</span>
+      </div>
+      <div class="bd">
+        <div class="stats">
+          <div class="stat">
+            <div class="k">Total anual</div>
+            <div class="v" id="totalBig">—</div>
+            <div class="h">pasos</div>
+          </div>
+          <div class="stat">
+            <div class="k">Distancia total</div>
+            <div class="v" id="totalKm">—</div>
+            <div class="h">km (estimado)</div>
+          </div>
+          <div class="stat">
+            <div class="k">Media mensual</div>
+            <div class="v" id="avgMonth">—</div>
+            <div class="h">pasos/mes</div>
+          </div>
+          <div class="stat">
+            <div class="k">Media diaria (365 días)</div>
+            <div class="v" id="avgDay">—</div>
+            <div class="h">pasos/día</div>
+          </div>
+          <div class="stat">
+            <div class="k">Mes más fuerte</div>
+            <div class="v" id="bestMonth">—</div>
+            <div class="h" id="bestMonthSteps">—</div>
+          </div>
+          <div class="stat">
+            <div class="k">Mes más flojo</div>
+            <div class="v" id="worstMonth">—</div>
+            <div class="h" id="worstMonthSteps">—</div>
+          </div>
+
+          <div class="big">
+            <div class="bigTitle">🌍 Equivalencias “mundo real”</div>
+            <ul class="list" id="equivs"></ul>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <canvas id="chart" width="900" height="360" aria-label="Gráfico mensual"></canvas>
+          <div class="foot">Tip: abre esto en móvil para verlo como “stories” (swipe).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ---------- MOBILE STORIES ---------- -->
+<section class="stories" aria-label="Stories de pasos">
+  <div class="storyWrap">
+    <div class="progress" id="progress"></div>
+
+    <div class="storyCard" id="storyCard">
+      <div class="tapL" id="tapL" aria-hidden="true"></div>
+      <div class="tapR" id="tapR" aria-hidden="true"></div>
+
+      <div class="storyInner" id="storyInner">
+        <!-- injected by JS -->
+      </div>
+    </div>
+
+    <div class="storyNav">
+      <button class="storyBtn" id="prevBtn">← Anterior</button>
+      <button class="storyBtn primary" id="nextBtn">Siguiente →</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // --- Tus datos ---
+  const steps = [376182,225108,297883,314167,343296,494262,352119,332073,492750,440786,390174,286265];
+  const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+  // Zancada basada en tus 2 referencias
+  const STRIDE_M = 0.787;
+
+  // “Equivalencias” (aprox, para el wow)
+  const EARTH_EQ_CIRC_KM = 40075.017;       // circunferencia ecuatorial
+  const MARATHON_KM = 42.195;
+  const MAD_BCN_KM = 504;                   // aproximación (línea recta-ish simplificada)
+  const MAD_LIS_KM = 502;                   // aproximación
+  const CAMINO_FRANCES_KM = 780;            // aproximación típica
+
+  const fmt = (n) => new Intl.NumberFormat("es-ES").format(n);
+
+  function calc(){
+    const total = steps.reduce((a,b)=>a+b,0);
+    const max = Math.max(...steps), min = Math.min(...steps);
+    const bestI = steps.indexOf(max), worstI = steps.indexOf(min);
+    const avgMonth = total/12;
+    const avgDay = total/365;
+    const totalKm = (total * STRIDE_M) / 1000;
+
+    // variación (consistencia simple)
+    const mean = avgMonth;
+    const variance = steps.reduce((acc,x)=>acc + Math.pow(x-mean,2),0)/steps.length;
+    const std = Math.sqrt(variance);
+    const cv = std/mean;
+
+    return { total, max, min, bestI, worstI, avgMonth, avgDay, totalKm, cv };
+  }
+
+  // ---------- DASHBOARD ----------
+  const d = {
+    strideTag: document.getElementById("strideTag"),
+    heroSteps: document.getElementById("heroSteps"),
+    heroKm: document.getElementById("heroKm"),
+    heroAvgDay: document.getElementById("heroAvgDay"),
+    toggleSort: document.getElementById("toggleSort"),
+    bestTag: document.getElementById("bestTag"),
+    monthRows: document.getElementById("monthRows"),
+    totalBig: document.getElementById("totalBig"),
+    totalKm: document.getElementById("totalKm"),
+    avgMonth: document.getElementById("avgMonth"),
+    avgDay: document.getElementById("avgDay"),
+    bestMonth: document.getElementById("bestMonth"),
+    bestMonthSteps: document.getElementById("bestMonthSteps"),
+    worstMonth: document.getElementById("worstMonth"),
+    worstMonthSteps: document.getElementById("worstMonthSteps"),
+    equivs: document.getElementById("equivs"),
+    chart: document.getElementById("chart"),
+  };
+
+  let sortMode = "chrono";
+
+  function renderDashboard(){
+    const { total, max, min, bestI, worstI, avgMonth, avgDay, totalKm, cv } = calc();
+
+    d.strideTag.textContent = `Zancada: ${STRIDE_M.toFixed(3)} m/paso`;
+    d.heroSteps.innerHTML = `${fmt(total)} <small>pasos</small>`;
+    d.heroKm.innerHTML = `${fmt(Math.round(totalKm))} <small>km</small>`;
+    d.heroAvgDay.innerHTML = `${fmt(Math.round(avgDay))} <small>pasos/día</small>`;
+
+    d.totalBig.textContent = fmt(total);
+    d.totalKm.textContent = fmt(Math.round(totalKm));
+    d.avgMonth.textContent = fmt(Math.round(avgMonth));
+    d.avgDay.textContent = fmt(Math.round(avgDay));
+    d.bestMonth.textContent = months[bestI];
+    d.bestMonthSteps.textContent = `${fmt(max)} pasos`;
+    d.worstMonth.textContent = months[worstI];
+    d.worstMonthSteps.textContent = `${fmt(min)} pasos`;
+    d.bestTag.textContent = `🔥 Top: ${months[bestI]} (${fmt(max)})`;
+
+    // Equivalencias “graciosas”
+    const marathons = totalKm / MARATHON_KM;
+    const camino = totalKm / CAMINO_FRANCES_KM;
+    const earthPct = (totalKm / EARTH_EQ_CIRC_KM) * 100;
+    const madBcn = totalKm / MAD_BCN_KM;
+    const madLis = totalKm / MAD_LIS_KM;
+    const consistency = Math.round(cv * 100);
+
+    d.equivs.innerHTML = `
+      <li>Has recorrido <b>${fmt(Math.round(totalKm))} km</b> en el año (estimado).</li>
+      <li>Eso son <b>${marathons.toFixed(1)}</b> maratones completas (42,195 km).</li>
+      <li>Es como hacer <b>${madBcn.toFixed(1)}×</b> un Madrid–Barcelona (≈ ${MAD_BCN_KM} km).</li>
+      <li>O <b>${madLis.toFixed(1)}×</b> un Madrid–Lisboa (≈ ${MAD_LIS_KM} km).</li>
+      <li>O <b>${camino.toFixed(2)}×</b> el Camino Francés (≈ ${CAMINO_FRANCES_KM} km).</li>
+      <li>Equivale al <b>${earthPct.toFixed(2)}%</b> de darle la vuelta a la Tierra por el ecuador.</li>
+      <li><b>Consistencia:</b> variación aprox. <b>${consistency}%</b> (más bajo = más regular).</li>
+    `;
+
+    renderRows();
+    drawChart();
+  }
+
+  function renderRows(){
+    const max = Math.max(...steps);
+    const items = steps.map((v,i)=>({ i, month: months[i], v, km:(v*STRIDE_M)/1000 }));
+
+    if(sortMode === "desc"){
+      items.sort((a,b)=>b.v-a.v);
+      d.toggleSort.textContent = "Ordenar: por pasos";
+    }else{
+      items.sort((a,b)=>a.i-b.i);
+      d.toggleSort.textContent = "Ordenar: cronológico";
+    }
+
+    d.monthRows.innerHTML = "";
+    for(const it of items){
+      const pct = Math.max(3, Math.round((it.v / max) * 100));
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `
+        <div class="rowTop">
+          <div class="rowLeft">
+            <b>${it.month}</b>
+            <div class="km">≈ ${fmt(Math.round(it.km))} km</div>
+          </div>
+          <div class="rowRight">
+            ${fmt(it.v)}
+            <small>pasos</small>
+          </div>
+        </div>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+      `;
+      d.monthRows.appendChild(row);
+    }
+  }
+
+  function drawChart(){
+    const c = d.chart;
+    const ctx = c.getContext("2d");
+    const W = c.width, H = c.height;
+
+    ctx.clearRect(0,0,W,H);
+
+    const padL = 56, padR = 18, padT = 18, padB = 44;
+    const innerW = W - padL - padR;
+    const innerH = H - padT - padB;
+
+    const max = Math.max(...steps);
+
+    // grid
+    ctx.globalAlpha = 0.35;
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 1;
+    const lines = 4;
+    for(let i=0;i<=lines;i++){
+      const y = padT + (innerH * i/lines);
+      ctx.beginPath();
+      ctx.moveTo(padL, y);
+      ctx.lineTo(W-padR, y);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    // labels left
+    ctx.fillStyle = "#e8eefc";
+    ctx.font = "12px ui-sans-serif, system-ui";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for(let i=0;i<=lines;i++){
+      const value = Math.round(max * (1 - i/lines));
+      const y = padT + (innerH * i/lines);
+      ctx.fillText(fmt(value), padL - 8, y);
+    }
+
+    const n = 12;
+    const gap = 10;
+    const barW = Math.floor((innerW - gap*(n-1)) / n);
+
+    const grad = ctx.createLinearGradient(0, padT, 0, padT + innerH);
+    grad.addColorStop(0, "rgba(122,167,255,.95)");
+    grad.addColorStop(1, "rgba(72,209,143,.95)");
+
+    for(let i=0;i<n;i++){
+      const v = steps[i];
+      const h = Math.round((v / max) * innerH);
+      const x = padL + i*(barW+gap);
+      const y = padT + (innerH - h);
+
+      ctx.fillStyle = grad;
+      roundRect(ctx, x, y, barW, h, 10);
+      ctx.fill();
+
+      ctx.fillStyle = "rgba(232,238,252,.85)";
+      ctx.font = "12px ui-sans-serif, system-ui";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      ctx.fillText(months[i].slice(0,1), x + barW/2, padT + innerH + 10);
+    }
+
+    ctx.fillStyle = "rgba(232,238,252,.9)";
+    ctx.font = "800 13px ui-sans-serif, system-ui";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("Gráfico mensual (E..D)", padL, 6);
+  }
+
+  function roundRect(ctx, x, y, w, h, r){
+    const radius = Math.min(r, w/2, h/2);
+    ctx.beginPath();
+    ctx.moveTo(x+radius, y);
+    ctx.arcTo(x+w, y, x+w, y+h, radius);
+    ctx.arcTo(x+w, y+h, x, y+h, radius);
+    ctx.arcTo(x, y+h, x, y, radius);
+    ctx.arcTo(x, y, x+w, y, radius);
+    ctx.closePath();
+  }
+
+  d.toggleSort?.addEventListener("click", ()=>{
+    sortMode = (sortMode === "chrono") ? "desc" : "chrono";
+    renderRows();
+  });
+
+  // ---------- STORIES ----------
+  const s = {
+    progress: document.getElementById("progress"),
+    inner: document.getElementById("storyInner"),
+    prev: document.getElementById("prevBtn"),
+    next: document.getElementById("nextBtn"),
+    tapL: document.getElementById("tapL"),
+    tapR: document.getElementById("tapR"),
+    card: document.getElementById("storyCard"),
+  };
+
+  function buildStorySlides(){
+    const { total, max, min, bestI, worstI, avgDay, totalKm } = calc();
+    const marathons = totalKm / MARATHON_KM;
+    const earthPct = (totalKm / EARTH_EQ_CIRC_KM) * 100;
+
+    const topMonths = steps
+      .map((v,i)=>({i,v}))
+      .sort((a,b)=>b.v-a.v)
+      .slice(0,3)
+      .map(x=>`${months[x.i]} (${fmt(x.v)})`);
+
+    const monthCards = months.map((m,i)=>{
+      const km = (steps[i]*STRIDE_M)/1000;
+      return `<div class="storyMonth">
+        <div class="m">${m}</div>
+        <div class="p">${fmt(steps[i])}</div>
+        <div class="k">≈ ${fmt(Math.round(km))} km</div>
+      </div>`;
+    }).join("");
+
+    return [
+      {
+        title: "Tu año en pasos",
+        big: `<span class="accent">${fmt(total)}</span> <small>pasos</small>`,
+        sub: `Resumen estilo stories. Tap/Swipe para avanzar.`,
+        box: `<div class="storyBox"><b>Zancada usada:</b> ${STRIDE_M.toFixed(3)} m/paso<br><b>Media diaria:</b> ${fmt(Math.round(avgDay))} pasos/día</div>`
+      },
+      {
+        title: "Distancia total",
+        big: `<span class="good">${fmt(Math.round(totalKm))}</span> <small>km</small>`,
+        sub: `Estimación según tu zancada real.`,
+        box: `<div class="storyBox">
+          Eso son <b>${marathons.toFixed(1)}</b> maratones completas.<br>
+          Y un <b>${earthPct.toFixed(2)}%</b> de la vuelta a la Tierra (ecuador).
+        </div>`
+      },
+      {
+        title: "Tu mejor mes",
+        big: `<span class="accent">${months[bestI]}</span>`,
+        sub: `El pico del año.`,
+        box: `<div class="storyBox">
+          <b>${fmt(max)}</b> pasos<br>
+          ≈ <b>${fmt(Math.round((max*STRIDE_M)/1000))}</b> km
+        </div>`
+      },
+      {
+        title: "Tu mes más flojo",
+        big: `<span style="color:var(--warn);font-weight:980">${months[worstI]}</span>`,
+        sub: `Aun así, suma. Siempre suma.`,
+        box: `<div class="storyBox">
+          <b>${fmt(min)}</b> pasos<br>
+          ≈ <b>${fmt(Math.round((min*STRIDE_M)/1000))}</b> km
+        </div>`
+      },
+      {
+        title: "Top 3 meses",
+        big: `<span class="good">🥇🥈🥉</span>`,
+        sub: `Tus meses más fuertes fueron:`,
+        box: `<div class="storyBox">
+          <ul class="storyList">
+            <li><b>${topMonths[0]}</b></li>
+            <li><b>${topMonths[1]}</b></li>
+            <li><b>${topMonths[2]}</b></li>
+          </ul>
+        </div>`
+      },
+      {
+        title: "Mes a mes",
+        big: `<span class="accent">12</span> <small>capítulos</small>`,
+        sub: `Tus números, sin trampa ni cartón.`,
+        box: `<div class="storyBox" style="padding:12px">
+          <div class="storyMonthGrid">${monthCards}</div>
+        </div>`
+      },
+      {
+        title: "Fin",
+        big: `<span class="accent">Vamos.</span> <small>Pablito</small>`,
+        sub: `Guardalo, compártelo o úsalo de motivación para el año que entra.`,
+        box: `<div class="storyBox">
+          <b>Pasos:</b> ${fmt(total)}<br>
+          <b>Km:</b> ${fmt(Math.round(totalKm))}<br>
+          <span style="color:var(--muted)">Tip: imprime esto en PDF desde el navegador.</span>
+        </div>`
+      }
+    ];
+  }
+
+  let slides = [];
+  let idx = 0;
+
+  function renderProgress(){
+    s.progress.innerHTML = slides.map((_,i)=>`<div class="prog"><i style="width:${i < idx ? 100 : (i===idx? 100 : 0)}%"></i></div>`).join("");
+  }
+
+  function renderStory(){
+    if(!s.inner) return;
+    const slide = slides[idx];
+    s.inner.innerHTML = `
+      <div class="storyTop">
+        <div class="storyTitle">${slide.title}</div>
+        <div class="storyHint">Tap derecha: siguiente<br>Tap izquierda: atrás</div>
+      </div>
+      <div class="storyBig">${slide.big}</div>
+      <div class="storySub">${slide.sub}</div>
+      ${slide.box || ""}
+    `;
+    renderProgress();
+    if(s.prev) s.prev.disabled = idx===0;
+    if(s.next) s.next.textContent = (idx === slides.length-1) ? "Reiniciar ↺" : "Siguiente →";
+  }
+
+  function next(){
+    if(idx < slides.length-1) idx++;
+    else idx = 0;
+    renderStory();
+  }
+  function prev(){
+    if(idx > 0) idx--;
+    renderStory();
+  }
+
+  // swipe support
+  let startX = null, startY = null;
+  function onTouchStart(e){
+    const t = e.touches[0];
+    startX = t.clientX; startY = t.clientY;
+  }
+  function onTouchEnd(e){
+    if(startX===null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    startX = null; startY = null;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
+      if(dx < 0) next(); else prev();
+    }
+  }
+
+  // init
+  renderDashboard();
+
+  slides = buildStorySlides();
+  renderStory();
+
+  s.next?.addEventListener("click", next);
+  s.prev?.addEventListener("click", prev);
+  s.tapL?.addEventListener("click", prev);
+  s.tapR?.addEventListener("click", next);
+
+  s.card?.addEventListener("touchstart", onTouchStart, {passive:true});
+  s.card?.addEventListener("touchend", onTouchEnd, {passive:true});
+
+  // keyboard
+  window.addEventListener("keydown", (e)=>{
+    if(e.key === "ArrowRight" || e.key === " "){ next(); }
+    if(e.key === "ArrowLeft"){ prev(); }
+  });
+</script>
+</body>
+</html>
