@@ -15,7 +15,6 @@
       --accent:#7aa7ff;
       --good:#48d18f;
       --warn:#ffcf5a;
-      --bad:#ff6b7a;
       --shadow: 0 12px 40px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
@@ -29,7 +28,6 @@
       color:var(--text);
       min-height:100vh;
     }
-    a{color:var(--accent)}
     .wrap{max-width:1020px;margin:0 auto;padding:22px 14px 44px}
 
     /* ---------- DESKTOP DASHBOARD ---------- */
@@ -56,7 +54,7 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.18);
     }
-    .heroK{font-size:12px;color:var(--muted)}
+    .heroK{font-size:12px;color:var(--muted);font-weight:700}
     .heroV{
       font-size:40px;
       font-weight:950;
@@ -64,7 +62,7 @@
       margin-top:6px;
       line-height:1;
     }
-    .heroV small{font-size:14px;color:var(--muted);font-weight:700;letter-spacing:0}
+    .heroV small{font-size:14px;color:var(--muted);font-weight:800;letter-spacing:0}
     .heroV.accent{color:var(--accent)}
     .heroV.good{color:var(--good)}
 
@@ -104,7 +102,7 @@
       color: var(--text);
       border-radius: 14px;
       padding:10px 12px;
-      font-weight:800;
+      font-weight:900;
       font-size:13px;
       user-select:none;
     }
@@ -116,7 +114,7 @@
       background: rgba(0,0,0,.18);
       color: var(--muted);
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
       white-space:nowrap;
     }
 
@@ -131,10 +129,10 @@
       display:flex;align-items:flex-end;justify-content:space-between;gap:10px;
     }
     .rowLeft b{font-size:15px}
-    .rowLeft .km{margin-top:4px;color:rgba(72,209,143,.95);font-weight:800;font-size:13px}
+    .rowLeft .km{margin-top:4px;color:rgba(72,209,143,.95);font-weight:900;font-size:13px}
     .rowRight{
       text-align:right;
-      font-weight:950;
+      font-weight:980;
       font-size:26px;
       letter-spacing:-.5px;
       line-height:1.05;
@@ -144,7 +142,7 @@
       margin-top:4px;
       font-size:12px;
       color:var(--muted);
-      font-weight:700;
+      font-weight:800;
       letter-spacing:0;
     }
     .bar{
@@ -170,8 +168,8 @@
       border-radius:18px;
       padding:12px 12px;
     }
-    .stat .k{font-size:12px;color:var(--muted);font-weight:700}
-    .stat .v{font-size:22px;font-weight:950;margin-top:6px;letter-spacing:-.3px}
+    .stat .k{font-size:12px;color:var(--muted);font-weight:800}
+    .stat .v{font-size:22px;font-weight:980;margin-top:6px;letter-spacing:-.3px}
     .stat .h{font-size:12px;color:var(--muted);margin-top:2px}
 
     .big{
@@ -181,7 +179,7 @@
       border:1px dashed rgba(255,255,255,.18);
       background: rgba(122,167,255,.08);
     }
-    .bigTitle{font-weight:950;letter-spacing:-.2px}
+    .bigTitle{font-weight:980;letter-spacing:-.2px}
     .list{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.5}
     .list b{color:var(--text)}
 
@@ -194,25 +192,55 @@
     }
     .foot{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.4;text-align:center}
 
-    /* ---------- STORIES (MOBILE) ---------- */
-    .stories{
+    /* ---------- MOBILE FULLSCREEN SLIDES ---------- */
+    .slides{
       display:none;
       position:fixed; inset:0;
       background:
-        radial-gradient(900px 400px at 10% 0%, rgba(122,167,255,.20), transparent 50%),
-        radial-gradient(900px 400px at 90% 10%, rgba(72,209,143,.14), transparent 55%),
-        linear-gradient(180deg, #070a10 0%, var(--bg) 70%, #060810 100%);
+        radial-gradient(900px 480px at 10% 0%, rgba(122,167,255,.24), transparent 55%),
+        radial-gradient(900px 480px at 90% 10%, rgba(72,209,143,.16), transparent 60%),
+        linear-gradient(180deg, #070a10 0%, var(--bg) 75%, #060810 100%);
       color:var(--text);
       z-index:50;
       overflow:hidden;
     }
-    .storyWrap{height:100%; display:flex; flex-direction:column; padding:14px}
+
+    .slideWrap{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      padding:14px 14px 12px;
+      gap:12px;
+    }
+
+    .topBar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:8px 4px 0;
+    }
+    .miniBrand{
+      font-weight:980;
+      letter-spacing:-.2px;
+      font-size:13px;
+      color: rgba(232,238,252,.90);
+    }
+    .miniHint{
+      font-size:12px;
+      color: rgba(159,176,208,.90);
+      font-weight:800;
+      letter-spacing:.1px;
+    }
+
     .progress{
-      display:flex; gap:6px; padding:10px 6px 8px;
+      display:flex;
+      gap:6px;
+      padding:0 4px;
     }
     .prog{
       flex:1;
-      height:4px;
+      height:3px;
       background: rgba(255,255,255,.12);
       border-radius:999px;
       overflow:hidden;
@@ -223,107 +251,147 @@
       width:0%;
       background: rgba(255,255,255,.85);
       border-radius:999px;
+      transition: width .28s ease;
     }
-    .storyCard{
+
+    .slideCard{
       flex:1;
       border:1px solid rgba(255,255,255,.12);
-      border-radius:26px;
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border-radius:28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
       box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
-    .storyInner{height:100%; padding:18px; display:flex; flex-direction:column; gap:12px}
-    .storyTop{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    .tapL,.tapR{
+      position:absolute; top:0; bottom:0; width:32%;
+      z-index:3;
     }
-    .storyTitle{
-      font-size:16px;
-      color: rgba(232,238,252,.92);
-      font-weight:900;
-      letter-spacing:-.2px;
+    .tapL{left:0}
+    .tapR{right:0}
+
+    .slideInner{
+      height:100%;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
-    .storyHint{
-      font-size:12px;
-      color: var(--muted);
-      font-weight:700;
-      text-align:right;
-      line-height:1.25;
-    }
-    .storyBig{
-      margin-top:8px;
-      font-size:46px;
-      font-weight:980;
-      letter-spacing:-1px;
-      line-height:1;
-    }
-    .storyBig small{font-size:14px;color:var(--muted);font-weight:800;letter-spacing:0}
-    .storyBig.accent{color:var(--accent)}
-    .storyBig.good{color:var(--good)}
-    .storySub{
-      color:var(--muted);
+
+    .slideTitle{
       font-size:14px;
-      line-height:1.4;
+      color: rgba(159,176,208,.95);
+      font-weight:900;
+      letter-spacing:.2px;
+      text-transform:uppercase;
     }
-    .storyBox{
+
+    .heroNum{
+      margin-top:2px;
+      font-size:64px;
+      font-weight:1000;
+      letter-spacing:-2px;
+      line-height:.95;
+      text-shadow: 0 10px 34px rgba(0,0,0,.45);
+    }
+    .heroNum .unit{
+      display:block;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.2px;
+      color: rgba(159,176,208,.95);
+      margin-top:10px;
+      text-transform:uppercase;
+    }
+    .glowAccent{
+      color: var(--accent);
+      text-shadow:
+        0 0 0 rgba(0,0,0,0),
+        0 12px 44px rgba(122,167,255,.18),
+        0 0 26px rgba(122,167,255,.14);
+    }
+    .glowGood{
+      color: var(--good);
+      text-shadow:
+        0 12px 44px rgba(72,209,143,.16),
+        0 0 26px rgba(72,209,143,.12);
+    }
+
+    .slideSub{
+      color: rgba(159,176,208,.95);
+      font-size:15px;
+      line-height:1.45;
+      font-weight:700;
+    }
+
+    .pillRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+    .pill{
+      flex:1 1 140px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      border-radius:18px;
+      padding:12px;
+    }
+    .pill .k{color:rgba(159,176,208,.95);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.2px}
+    .pill .v{margin-top:6px;font-weight:980;font-size:22px;letter-spacing:-.6px}
+
+    .bottomBox{
       margin-top:auto;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.16);
       border-radius:18px;
       padding:12px;
     }
-    .storyBox b{color:var(--text)}
-    .storyList{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.5;font-size:14px}
-    .storyMonthGrid{
+    .bottomBox b{color:var(--text)}
+    .bottomList{margin:10px 0 0;padding-left:18px;color:rgba(159,176,208,.95);line-height:1.5;font-size:14px}
+    .monthGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:10px;
-      margin-top:6px;
+      max-height:38vh;
       overflow:auto;
-      padding-bottom:6px;
+      padding-right:2px;
+      margin-top:6px;
     }
-    .storyMonth{
+    .monthCard{
       border:1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.14);
       border-radius:18px;
       padding:12px;
     }
-    .storyMonth .m{font-weight:950}
-    .storyMonth .p{font-weight:980;font-size:22px;letter-spacing:-.4px;margin-top:6px}
-    .storyMonth .k{color:rgba(72,209,143,.95);font-weight:900;margin-top:4px;font-size:12px}
+    .monthCard .m{font-weight:980}
+    .monthCard .p{font-weight:1000;font-size:22px;letter-spacing:-.5px;margin-top:6px}
+    .monthCard .k{color:rgba(72,209,143,.95);font-weight:950;margin-top:4px;font-size:12px}
 
-    .storyNav{
-      display:flex; gap:10px; padding:12px 6px 4px;
+    .nav{
+      display:flex; gap:10px; padding:0 4px;
     }
-    .storyBtn{
+    .navBtn{
       flex:1;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.08);
       color: var(--text);
-      border-radius:16px;
+      border-radius:18px;
       padding:12px 12px;
-      font-weight:950;
+      font-weight:980;
       font-size:14px;
       user-select:none;
     }
-    .storyBtn.primary{
-      background: linear-gradient(90deg, rgba(122,167,255,.90), rgba(72,209,143,.90));
+    .navBtn.primary{
+      background: linear-gradient(90deg, rgba(122,167,255,.95), rgba(72,209,143,.92));
       color:#08101f;
       border:none;
     }
+    .navBtn:disabled{opacity:.5}
 
-    /* tap areas for story navigation */
-    .tapL,.tapR{
-      position:absolute; top:0; bottom:0; width:30%;
-      z-index:3;
-    }
-    .tapL{left:0}
-    .tapR{right:0}
-
-    /* show stories on small screens */
     @media (max-width: 740px){
       .dash{display:none;}
-      .stories{display:block;}
+      .slides{display:block;}
     }
   </style>
 </head>
@@ -336,7 +404,7 @@
     <div class="title">
       <div>
         <h1>🏃‍♂️ Wrapped de Pasos — Tu año en números</h1>
-        <div class="sub">Mes a mes, recuento final y comparaciones divertidas (estimado por tu zancada real).</div>
+        <div class="sub">Mes a mes, recuento final y comparaciones (estimado por tu zancada real).</div>
       </div>
       <span class="tag" id="strideTag">Zancada: — m/paso</span>
     </div>
@@ -410,37 +478,38 @@
           </div>
 
           <div class="big">
-            <div class="bigTitle">🌍 Equivalencias “mundo real”</div>
+            <div class="bigTitle">🌍 Equivalencias</div>
             <ul class="list" id="equivs"></ul>
           </div>
         </div>
 
         <div style="margin-top:12px;">
           <canvas id="chart" width="900" height="360" aria-label="Gráfico mensual"></canvas>
-          <div class="foot">Tip: abre esto en móvil para verlo como “stories” (swipe).</div>
+          <div class="foot">En móvil se muestra a pantalla completa con slides.</div>
         </div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ---------- MOBILE STORIES ---------- -->
-<section class="stories" aria-label="Stories de pasos">
-  <div class="storyWrap">
+<!-- ---------- MOBILE FULLSCREEN SLIDES ---------- -->
+<section class="slides" aria-label="Resumen a pantalla completa">
+  <div class="slideWrap">
+    <div class="topBar">
+      <div class="miniBrand">Resumen anual</div>
+      <div class="miniHint">Toca · Desliza</div>
+    </div>
     <div class="progress" id="progress"></div>
 
-    <div class="storyCard" id="storyCard">
+    <div class="slideCard" id="slideCard">
       <div class="tapL" id="tapL" aria-hidden="true"></div>
       <div class="tapR" id="tapR" aria-hidden="true"></div>
-
-      <div class="storyInner" id="storyInner">
-        <!-- injected by JS -->
-      </div>
+      <div class="slideInner" id="slideInner"></div>
     </div>
 
-    <div class="storyNav">
-      <button class="storyBtn" id="prevBtn">← Anterior</button>
-      <button class="storyBtn primary" id="nextBtn">Siguiente →</button>
+    <div class="nav">
+      <button class="navBtn" id="prevBtn">←</button>
+      <button class="navBtn primary" id="nextBtn">→</button>
     </div>
   </div>
 </section>
@@ -453,12 +522,12 @@
   // Zancada basada en tus 2 referencias
   const STRIDE_M = 0.787;
 
-  // “Equivalencias” (aprox, para el wow)
-  const EARTH_EQ_CIRC_KM = 40075.017;       // circunferencia ecuatorial
+  // Equivalencias (aprox para “wow”, sin internet)
+  const EARTH_EQ_CIRC_KM = 40075.017;
   const MARATHON_KM = 42.195;
-  const MAD_BCN_KM = 504;                   // aproximación (línea recta-ish simplificada)
-  const MAD_LIS_KM = 502;                   // aproximación
-  const CAMINO_FRANCES_KM = 780;            // aproximación típica
+  const CAMINO_FRANCES_KM = 780;
+  const MAD_BCN_KM = 504;
+  const MAD_LIS_KM = 502;
 
   const fmt = (n) => new Intl.NumberFormat("es-ES").format(n);
 
@@ -520,7 +589,7 @@
     d.worstMonthSteps.textContent = `${fmt(min)} pasos`;
     d.bestTag.textContent = `🔥 Top: ${months[bestI]} (${fmt(max)})`;
 
-    // Equivalencias “graciosas”
+    // Equivalencias
     const marathons = totalKm / MARATHON_KM;
     const camino = totalKm / CAMINO_FRANCES_KM;
     const earthPct = (totalKm / EARTH_EQ_CIRC_KM) * 100;
@@ -529,13 +598,13 @@
     const consistency = Math.round(cv * 100);
 
     d.equivs.innerHTML = `
-      <li>Has recorrido <b>${fmt(Math.round(totalKm))} km</b> en el año (estimado).</li>
-      <li>Eso son <b>${marathons.toFixed(1)}</b> maratones completas (42,195 km).</li>
-      <li>Es como hacer <b>${madBcn.toFixed(1)}×</b> un Madrid–Barcelona (≈ ${MAD_BCN_KM} km).</li>
-      <li>O <b>${madLis.toFixed(1)}×</b> un Madrid–Lisboa (≈ ${MAD_LIS_KM} km).</li>
-      <li>O <b>${camino.toFixed(2)}×</b> el Camino Francés (≈ ${CAMINO_FRANCES_KM} km).</li>
-      <li>Equivale al <b>${earthPct.toFixed(2)}%</b> de darle la vuelta a la Tierra por el ecuador.</li>
-      <li><b>Consistencia:</b> variación aprox. <b>${consistency}%</b> (más bajo = más regular).</li>
+      <li><b>${fmt(Math.round(totalKm))} km</b> en el año (estimado).</li>
+      <li><b>${marathons.toFixed(1)}</b> maratones completas.</li>
+      <li><b>${madBcn.toFixed(1)}×</b> Madrid–Barcelona.</li>
+      <li><b>${madLis.toFixed(1)}×</b> Madrid–Lisboa.</li>
+      <li><b>${camino.toFixed(2)}×</b> el Camino Francés.</li>
+      <li><b>${earthPct.toFixed(2)}%</b> de la vuelta a la Tierra.</li>
+      <li><b>Regularidad:</b> variación aprox. <b>${consistency}%</b>.</li>
     `;
 
     renderRows();
@@ -662,31 +731,30 @@
     renderRows();
   });
 
-  // ---------- STORIES ----------
+  // ---------- MOBILE SLIDES ----------
   const s = {
     progress: document.getElementById("progress"),
-    inner: document.getElementById("storyInner"),
+    inner: document.getElementById("slideInner"),
     prev: document.getElementById("prevBtn"),
     next: document.getElementById("nextBtn"),
     tapL: document.getElementById("tapL"),
     tapR: document.getElementById("tapR"),
-    card: document.getElementById("storyCard"),
+    card: document.getElementById("slideCard"),
   };
 
-  function buildStorySlides(){
-    const { total, max, min, bestI, worstI, avgDay, totalKm } = calc();
+  function buildSlides(){
+    const { total, max, min, bestI, worstI, avgDay, totalKm, avgMonth } = calc();
     const marathons = totalKm / MARATHON_KM;
     const earthPct = (totalKm / EARTH_EQ_CIRC_KM) * 100;
 
     const topMonths = steps
       .map((v,i)=>({i,v}))
       .sort((a,b)=>b.v-a.v)
-      .slice(0,3)
-      .map(x=>`${months[x.i]} (${fmt(x.v)})`);
+      .slice(0,3);
 
     const monthCards = months.map((m,i)=>{
       const km = (steps[i]*STRIDE_M)/1000;
-      return `<div class="storyMonth">
+      return `<div class="monthCard">
         <div class="m">${m}</div>
         <div class="p">${fmt(steps[i])}</div>
         <div class="k">≈ ${fmt(Math.round(km))} km</div>
@@ -695,66 +763,87 @@
 
     return [
       {
-        title: "Tu año en pasos",
-        big: `<span class="accent">${fmt(total)}</span> <small>pasos</small>`,
-        sub: `Resumen estilo stories. Tap/Swipe para avanzar.`,
-        box: `<div class="storyBox"><b>Zancada usada:</b> ${STRIDE_M.toFixed(3)} m/paso<br><b>Media diaria:</b> ${fmt(Math.round(avgDay))} pasos/día</div>`
+        title: "Pasos totales",
+        hero: `<div class="heroNum glowAccent">${fmt(total)}<span class="unit">pasos</span></div>`,
+        sub: `Media diaria: <b>${fmt(Math.round(avgDay))}</b> · Media mensual: <b>${fmt(Math.round(avgMonth))}</b>`,
+        pills: `
+          <div class="pillRow">
+            <div class="pill"><div class="k">Zancada</div><div class="v">${STRIDE_M.toFixed(3)} m</div></div>
+            <div class="pill"><div class="k">Días</div><div class="v">365</div></div>
+          </div>
+        `,
+        bottom: `<div class="bottomBox"><b>Idea:</b> este número es tu “score” del año.</div>`
       },
       {
         title: "Distancia total",
-        big: `<span class="good">${fmt(Math.round(totalKm))}</span> <small>km</small>`,
-        sub: `Estimación según tu zancada real.`,
-        box: `<div class="storyBox">
-          Eso son <b>${marathons.toFixed(1)}</b> maratones completas.<br>
-          Y un <b>${earthPct.toFixed(2)}%</b> de la vuelta a la Tierra (ecuador).
+        hero: `<div class="heroNum glowGood">${fmt(Math.round(totalKm))}<span class="unit">kilómetros</span></div>`,
+        sub: `Estimado con tu zancada real.`,
+        pills: `
+          <div class="pillRow">
+            <div class="pill"><div class="k">Maratones</div><div class="v">${marathons.toFixed(1)}×</div></div>
+            <div class="pill"><div class="k">Vuelta a la Tierra</div><div class="v">${earthPct.toFixed(2)}%</div></div>
+          </div>
+        `,
+        bottom: `<div class="bottomBox">
+          <ul class="bottomList">
+            <li><b>${(totalKm/CAMINO_FRANCES_KM).toFixed(2)}×</b> Camino Francés</li>
+            <li><b>${(totalKm/MAD_BCN_KM).toFixed(1)}×</b> Madrid–Barcelona</li>
+            <li><b>${(totalKm/MAD_LIS_KM).toFixed(1)}×</b> Madrid–Lisboa</li>
+          </ul>
         </div>`
       },
       {
-        title: "Tu mejor mes",
-        big: `<span class="accent">${months[bestI]}</span>`,
-        sub: `El pico del año.`,
-        box: `<div class="storyBox">
-          <b>${fmt(max)}</b> pasos<br>
-          ≈ <b>${fmt(Math.round((max*STRIDE_M)/1000))}</b> km
-        </div>`
+        title: "Mejor mes",
+        hero: `<div class="heroNum glowAccent">${months[bestI]}<span class="unit">${fmt(max)} pasos</span></div>`,
+        sub: `Tu pico del año.`,
+        pills: `
+          <div class="pillRow">
+            <div class="pill"><div class="k">Km ese mes</div><div class="v">${fmt(Math.round((max*STRIDE_M)/1000))}</div></div>
+            <div class="pill"><div class="k">Posición</div><div class="v">#1</div></div>
+          </div>
+        `,
+        bottom: `<div class="bottomBox"><b>Nota:</b> ese mes te salió modo máquina.</div>`
       },
       {
-        title: "Tu mes más flojo",
-        big: `<span style="color:var(--warn);font-weight:980">${months[worstI]}</span>`,
-        sub: `Aun así, suma. Siempre suma.`,
-        box: `<div class="storyBox">
-          <b>${fmt(min)}</b> pasos<br>
-          ≈ <b>${fmt(Math.round((min*STRIDE_M)/1000))}</b> km
-        </div>`
+        title: "Mes más flojo",
+        hero: `<div class="heroNum" style="color:var(--warn)">${months[worstI]}<span class="unit">${fmt(min)} pasos</span></div>`,
+        sub: `Aun así suma. Siempre suma.`,
+        pills: `
+          <div class="pillRow">
+            <div class="pill"><div class="k">Km ese mes</div><div class="v">${fmt(Math.round((min*STRIDE_M)/1000))}</div></div>
+            <div class="pill"><div class="k">Posición</div><div class="v">#12</div></div>
+          </div>
+        `,
+        bottom: `<div class="bottomBox"><b>Clásico:</b> el “mes complicado” también cuenta.</div>`
       },
       {
-        title: "Top 3 meses",
-        big: `<span class="good">🥇🥈🥉</span>`,
+        title: "Top 3",
+        hero: `<div class="heroNum glowGood">Top 3<span class="unit">meses</span></div>`,
         sub: `Tus meses más fuertes fueron:`,
-        box: `<div class="storyBox">
-          <ul class="storyList">
-            <li><b>${topMonths[0]}</b></li>
-            <li><b>${topMonths[1]}</b></li>
-            <li><b>${topMonths[2]}</b></li>
+        bottom: `<div class="bottomBox">
+          <ul class="bottomList">
+            <li><b>🥇 ${months[topMonths[0].i]}</b> — ${fmt(topMonths[0].v)} pasos</li>
+            <li><b>🥈 ${months[topMonths[1].i]}</b> — ${fmt(topMonths[1].v)} pasos</li>
+            <li><b>🥉 ${months[topMonths[2].i]}</b> — ${fmt(topMonths[2].v)} pasos</li>
           </ul>
         </div>`
       },
       {
         title: "Mes a mes",
-        big: `<span class="accent">12</span> <small>capítulos</small>`,
-        sub: `Tus números, sin trampa ni cartón.`,
-        box: `<div class="storyBox" style="padding:12px">
-          <div class="storyMonthGrid">${monthCards}</div>
+        hero: `<div class="heroNum glowAccent">12<span class="unit">meses</span></div>`,
+        sub: `Tus números completos.`,
+        bottom: `<div class="bottomBox" style="padding:12px">
+          <div class="monthGrid">${monthCards}</div>
         </div>`
       },
       {
         title: "Fin",
-        big: `<span class="accent">Vamos.</span> <small>Pablito</small>`,
+        hero: `<div class="heroNum glowAccent">Vamos<span class="unit">Pablito</span></div>`,
         sub: `Guardalo, compártelo o úsalo de motivación para el año que entra.`,
-        box: `<div class="storyBox">
+        bottom: `<div class="bottomBox">
           <b>Pasos:</b> ${fmt(total)}<br>
           <b>Km:</b> ${fmt(Math.round(totalKm))}<br>
-          <span style="color:var(--muted)">Tip: imprime esto en PDF desde el navegador.</span>
+          <span style="color:rgba(159,176,208,.95);font-weight:800">Tip: imprimir a PDF desde el navegador.</span>
         </div>`
       }
     ];
@@ -764,34 +853,32 @@
   let idx = 0;
 
   function renderProgress(){
-    s.progress.innerHTML = slides.map((_,i)=>`<div class="prog"><i style="width:${i < idx ? 100 : (i===idx? 100 : 0)}%"></i></div>`).join("");
+    s.progress.innerHTML = slides.map((_,i)=>`<div class="prog"><i style="width:${i < idx ? 100 : (i===idx ? 100 : 0)}%"></i></div>`).join("");
   }
 
-  function renderStory(){
+  function renderSlide(){
     if(!s.inner) return;
     const slide = slides[idx];
     s.inner.innerHTML = `
-      <div class="storyTop">
-        <div class="storyTitle">${slide.title}</div>
-        <div class="storyHint">Tap derecha: siguiente<br>Tap izquierda: atrás</div>
-      </div>
-      <div class="storyBig">${slide.big}</div>
-      <div class="storySub">${slide.sub}</div>
-      ${slide.box || ""}
+      <div class="slideTitle">${slide.title}</div>
+      ${slide.hero}
+      <div class="slideSub">${slide.sub || ""}</div>
+      ${slide.pills || ""}
+      ${slide.bottom || ""}
     `;
     renderProgress();
     if(s.prev) s.prev.disabled = idx===0;
-    if(s.next) s.next.textContent = (idx === slides.length-1) ? "Reiniciar ↺" : "Siguiente →";
+    if(s.next) s.next.textContent = (idx === slides.length-1) ? "↺" : "→";
   }
 
   function next(){
     if(idx < slides.length-1) idx++;
     else idx = 0;
-    renderStory();
+    renderSlide();
   }
   function prev(){
     if(idx > 0) idx--;
-    renderStory();
+    renderSlide();
   }
 
   // swipe support
@@ -813,9 +900,8 @@
 
   // init
   renderDashboard();
-
-  slides = buildStorySlides();
-  renderStory();
+  slides = buildSlides();
+  renderSlide();
 
   s.next?.addEventListener("click", next);
   s.prev?.addEventListener("click", prev);
@@ -825,7 +911,7 @@
   s.card?.addEventListener("touchstart", onTouchStart, {passive:true});
   s.card?.addEventListener("touchend", onTouchEnd, {passive:true});
 
-  // keyboard
+  // keyboard (por si se abre en móvil con teclado o en desktop emulando)
   window.addEventListener("keydown", (e)=>{
     if(e.key === "ArrowRight" || e.key === " "){ next(); }
     if(e.key === "ArrowLeft"){ prev(); }
